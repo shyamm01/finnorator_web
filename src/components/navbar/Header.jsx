@@ -3,7 +3,7 @@ import { IoIosArrowRoundForward } from "react-icons/io";
 
 const Header = () => {
   return (
-    <div className="w-full h-['80px'] justify-between items-center inline-flex border-b-grey-100 shadow-lg px-7 sticky top-0 z-50 bg-white-50">
+    <div className="w-full h-['80px'] justify-between items-center inline-flex border-b-grey-100 shadow-lg sticky top-0 z-50 bg-white-50 px-8">
       <div className="justify-start items-center gap-10 flex ">
         <img className="md:w-[200px] w-[120px]" src="./images/image-1.png" alt="logo" />
         <div className="justify-start items-start gap-12 md:flex hidden">

@@ -24,13 +24,12 @@ function App() {
   })
   
   return !loading ? (
-      <div className='w-full px-8'>
+      <div className='w-full'>
         <Header />
-        <LandingPage/>
         <main>
         <Outlet />
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </div>
   ) : null
 }
