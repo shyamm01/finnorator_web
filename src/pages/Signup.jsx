@@ -22,9 +22,9 @@ const Signup = () => {
         <div className="w-full">
           <h1 className="font-medium text-h4">Sign Up</h1>
         </div>
-        <div>
+        <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-8">
-            <div className="flex flex-col sm:flex-row justify-between gap-8">
+            <div className="flex flex-col sm:flex-row  justify-between gap-8">
               <TextField
                 fullWidth
                 label='First Name'
@@ -77,12 +77,12 @@ const Signup = () => {
               // helperText="Incorrect password"
             />
           </div>
-          <ul className="flex flex-wrap gap-[18px] list-disc list-inside">
-            <li>Use 8 or more characters</li>
-            <li>One Uppercase character</li>
-            <li>One lowercase character</li>
-            <li>One special character</li>
-            <li>One number</li>
+          <ul className="flex flex-wrap gap-x-[18px]  list-disc list-inside">
+            <li className="text-success-700">Use 8 or more characters</li>
+            <li className="text-success-700 ">One Uppercase character</li>
+            <li className="text-error-500">One lowercase character</li>
+            <li className="text-white-900">One special character</li>
+            <li className="text-white-900">One number</li>
           </ul>
           <div className="flex flex-col gap-8 mt-6">
             <FormControlLabel
@@ -90,11 +90,11 @@ const Signup = () => {
               labelPlacement="end"
               label="I want to receive emails about the product, feature updates, events, and marketing promotions."
             />
-            <p>By creating an account, you agree to the Terms of use and Privacy Policy.</p>
+            <p className="text-white-900">By creating an account, you agree to the <Link className="text-grey-900 underline">Terms of use</Link> and <Link className="text-grey-900 underline">Privacy Policy.</Link></p>
           </div>
           <div className="flex flex-col w-full md:w-1/2 gap-2 mt-4">
             <Button fullWidth variant="contained" color="primary" size="large">Log In</Button>
-            <p>Already have an account? <Link className="underline">Log in</Link></p>
+            <p className="text-white-900">Already have an account? <Link className="underline text-grey-900">Log in</Link></p>
           </div>
         </div>
       </div>
