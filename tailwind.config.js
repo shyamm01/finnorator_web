@@ -5,7 +5,22 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontSize: {
+        sm: ['14px', '20px'],
+        base: ['16px', '24px'],
+        lg: ['20px', '28px'],
+        xl: ['24px', '32px'],
+        h1: ['56px', '130%'],
+        h2: ['48px', '130%'],
+        h3: ['40px', '130%'],
+        h4: ['32px', '130%'],
+        h5: ['24px', '140%'],
+        h6: ['20px', '140%'],
+        regular:['16px','normal'],
+        large:['20px','130%']
+      }
+    },
     colors: {
       primary: {
         50: '#e8f4fc',
@@ -107,19 +122,7 @@ export default {
     fontFamily: {
       sans: ['DM Sans'],
     },
-    fontSize: {
-      sm: ['14px', '20px'],
-      base: ['16px', '24px'],
-      lg: ['20px', '28px'],
-      xl: ['24px', '32px'],
-      h1: ['56px', '130%'],
-      h2: ['48px', '130%'],
-      h3: ['40px', '130%'],
-      h4: ['32px', '130%'],
-      h5: ['24px', '140%'],
-      h6: ['20px', '140%'],
-      regular:['16px','normal'],
-    }
+   
   },
   plugins: [],
 }

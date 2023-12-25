@@ -5,7 +5,7 @@ import authService from "./services/auth/authServices"
 import {login, logout} from "./store/slices/authSlice"
 import { Footer, Header } from './components/index'
 import { Outlet } from 'react-router-dom'
-import LandingPage from './components/landingpage/LandingPage'
+
 
 function App() {
   const [loading, setLoading] = useState(true)
