@@ -1,20 +1,31 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material"
-import { Button, Checkbox, FormControlLabel, IconButton, InputAdornment, TextField } from "@mui/material"
+import { Checkbox, FormControlLabel, IconButton, InputAdornment, TextField } from "@mui/material"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import { Link, useNavigate } from "react-router-dom"
+import { LoadingButton } from '@mui/lab';
 
 const Signup = () => {
-
+  const { handleSubmit, register, formState } = useForm();
+  const { errors } = formState;
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setloading] = useState(false)
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    promotions: true,
-  })
+
+  const onSubmit = async (data) => {
+    setloading(true);
+    setTimeout(() => {
+      console.log(data);
+      setloading(false);
+      navigate('/email-verification');
+    }, 3000);
+
+  };
+  console.log(errors)
+  console.log(formState)
+  console.log(!errors.password)
 
   return (
     <div className='w-full flex justify-between '>
@@ -22,7 +33,7 @@ const Signup = () => {
         <div className="w-full">
           <h1 className="font-medium text-h4">Sign Up</h1>
         </div>
-        <div className="flex flex-col gap-4">
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-8">
             <div className="flex flex-col sm:flex-row  justify-between gap-8">
               <TextField
@@ -30,18 +41,36 @@ const Signup = () => {
                 label='First Name'
                 variant="outlined"
                 size='large'
-                // onChange={someChangeHandler}
-                error
-                helperText="Only have a-z characters"
+                {...register("firstName", {
+                  required: "First name is required",
+                  validate: {
+                    maxLength: (v) =>
+                      v.length <= 50,
+                    matchPattern: (v) =>
+                      /^[a-zA-Z]+$/.test(v) ||
+                      "Only have a-z characters",
+                  },
+                })}
+                error={!!errors.firstName}
+                helperText={errors.firstName?.message}
+
               />
               <TextField
                 fullWidth
                 label='Last Name'
                 variant="outlined"
                 size='large'
-                // onChange={someChangeHandler}
-                error
-                helperText="Only have a-z characters"
+                {...register("lastName", {
+                  validate: {
+                    maxLength: (v) =>
+                      v.length <= 50,
+                    matchPattern: (v) =>
+                      /^[a-zA-Z]+$/.test(v) ||
+                      "Only have a-z characters",
+                  },
+                })}
+                error={!!errors.lastName}
+                helperText={errors.lastName?.message}
               />
             </div>
             <TextField
@@ -49,18 +78,26 @@ const Signup = () => {
               label='Email'
               variant="outlined"
               size='large'
-              // onChange={someChangeHandler}
-              error
-              helperText="must have @ or ."
+              {...register("email", {
+                required: "Email is required",
+                validate: {
+                  maxLength: (v) =>
+                    v.length <= 50,
+                  matchPattern: (v) =>
+                    /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
+                    "must have @ or .",
+                },
+              })}
+              error={!!errors.email}
+              helperText={errors.email?.message}
             />
             <TextField
               fullWidth
               label='Password'
               variant="outlined"
               size='large'
-              type={showPassword ? "text" : "password"} // <-- This is where the magic happens
-              // onChange={someChangeHandler}
-              InputProps={{ // <-- This is where the toggle button is added.
+              type={showPassword ? "text" : "password"}
+              InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton
@@ -73,30 +110,45 @@ const Signup = () => {
                   </InputAdornment>
                 )
               }}
-              // error
-              // helperText="Incorrect password"
+              {...register("password", {
+                required: "Password is required",
+                validate: {
+                  maxLength: (v) =>
+                    v.length >= 8 || "Use 8 or more characters",
+                },
+              })}
+              error={!!errors.password}
             />
           </div>
           <ul className="flex flex-wrap gap-x-[18px]  list-disc list-inside">
-            <li className="text-success-700">Use 8 or more characters</li>
-            <li className="text-success-700 ">One Uppercase character</li>
-            <li className="text-error-500">One lowercase character</li>
-            <li className="text-white-900">One special character</li>
-            <li className="text-white-900">One number</li>
+            <li className={`${!errors.password ? "text-success-700" : "text-error-500"}`}>Use 8 or more characters</li>
+            <li className={`${!errors.password ? "text-success-700" : "text-error-500"}`}>One Uppercase character</li>
+            <li className={`${!errors.password ? "text-success-700" : "text-error-500"}`}>One lowercase character</li>
+            <li className={`${!errors.password ? "text-success-700" : "text-error-500"}`}>One special character</li>
+            <li className={`${!errors.password ? "text-success-700" : "text-error-500"}`}>One number</li>
           </ul>
           <div className="flex flex-col gap-8 mt-6">
             <FormControlLabel
-              control={<Checkbox />}
+              control={
+                <Checkbox
+                  {...register("promotion", {
+                    required: "Field is required"
+                  })}
+
+                  error={!!errors.promotion}
+                />
+              }
               labelPlacement="end"
               label="I want to receive emails about the product, feature updates, events, and marketing promotions."
             />
+
             <p className="text-white-900">By creating an account, you agree to the <Link className="text-grey-900 underline">Terms of use</Link> and <Link className="text-grey-900 underline">Privacy Policy.</Link></p>
           </div>
           <div className="flex flex-col w-full md:w-1/2 gap-2 mt-4">
-            <Button fullWidth variant="contained" color="primary" size="large">Log In</Button>
-            <p className="text-white-900">Already have an account? <Link className="underline text-grey-900">Log in</Link></p>
+            <LoadingButton fullWidth type="submit" variant="contained" loading={loading} color="primary" size="large">Log In</LoadingButton>
+            <p className="text-white-900">Already have an account? <Link  to='/login' className="underline text-grey-900">Log in</Link></p>
           </div>
-        </div>
+        </form>
       </div>
       <div className="hidden md:block md:w-1/3 ">
         <img className="bg-cover h-[100%]" src='./images/signup.png' alt='signup image' />

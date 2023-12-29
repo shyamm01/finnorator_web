@@ -8,6 +8,7 @@ import store from './store/store.js'
 import Signup from './pages/Signup.jsx'
 import Login from './pages/Login.jsx'
 import LandingPage from './components/landingpage/LandingPage.jsx'
+import EmailVerification from './components/screens/EmailVerification.jsx'
 
 
 const router = createBrowserRouter(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path='' element={<LandingPage />}/>
       <Route path='login' element={<Login />}/>
       <Route path='signup' element={<Signup />} />
+      <Route path='email-verification' element={<EmailVerification />} />
     </Route>
   )
 );
