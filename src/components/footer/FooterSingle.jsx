@@ -47,7 +47,7 @@ const footerItems = [
 ]
 
   return (
-    <div className="w-full flex flex-wrap gap-x-1 py-8 justify-around items-center ">
+    <div className="w-[70%] mx-auto flex flex-wrap gap-x-1 py-8 justify-around items-center ">
         {footerItems.map((item, index)=><Link className="no-underline text-white-900 text-nowrap" key={`${item.path}${index}`}>{item.item}</Link>)}
     </div>
   )

@@ -35,7 +35,7 @@ const Header = () => {
           </a>
           <div className="flex items-center ms-auto lg:order-2">
             <div className="px-3 py-4 w-['119px'] h-['48px'] rounded-lg justify-center items-center gap-2.5 flex">
-              <NavLink to={'/signup'} className=" text-primary-500 bg-white-300 p-2 rounded-md justify-center items-center gap-2 flex"><span>Sign in</span>
+              <NavLink to={'/login'} className=" text-primary-500 bg-white-300 p-2 rounded-md justify-center items-center gap-2 flex"><span>Sign in</span>
                 <IoIosArrowRoundForward className="text-primary-500  text-regular w-6 h-6" /></NavLink>
             </div>
             <div className="px-3 py-4 w-['119px'] h-['48px'] bg-sky-500 rounded-lg justify-center items-center gap-2.5 md:flex hidden">
